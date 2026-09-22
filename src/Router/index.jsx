@@ -1,4 +1,3 @@
-import { createBrowserRouter } from "react-router";
 import Layout from "../Layout";
 import Home from "../Pages/Home";
 import About from "../Pages/About";
@@ -8,6 +7,8 @@ import Profile from "../Pages/Profile";
 import Auth from "../Pages/Auth";
 import Protected from "../Layout/Protected";
 import NotFound from "../Pages/NotFound";
+import { createBrowserRouter } from "react-router-dom";
+import Cart from "../Pages/Cart";
 const router =createBrowserRouter([
     {
         path:"/",

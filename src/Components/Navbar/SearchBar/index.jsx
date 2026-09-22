@@ -1,9 +1,7 @@
 import React, { useEffect, useReducer } from "react";
 import { fetchData } from "../../../Utils/fetchData";
-import { useDispatch } from "react-redux";
 import { Grid } from "react-loader-spinner";
-import { useNavigate } from "react-router";
-import { type } from "os";
+import { useNavigate } from "react-router-dom";
 const initialState = {
   loading: false,
   showResult: false,
@@ -88,14 +86,14 @@ export default function SearchBar() {
           dispatch({ type: "SEARCH_REQUEST", payload: e.target.value })
         }
       />
-      <div className={showResult? h-100 : h-0}>
+      <div className={showResult? 'h-100' : 'h-0'}>
         {loading? <Grid/> :
-         categories.length ==0 && products.length ==0 ?(<h2>Not Found</h2>)
+         categories?.length ==0 && products?.length ==0 ?(<h2>Not Found</h2>)
          :(
             <>
                 <div>
                     <h2>Categories</h2>
-                    {categoryItems.length !=0 ?
+                    {categoryItems?.length !=0 ?
                     categoryItems 
                     :(
                         <h3>category not found!</h3>
@@ -103,7 +101,7 @@ export default function SearchBar() {
                 </div>
                 <div>
                     <h2>products</h2>
-                    {productItems.length !=0 ?
+                    {productItems?.length !=0 ?
                     productItems 
                     :(
                         <h3>products not found!</h3>
