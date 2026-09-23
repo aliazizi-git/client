@@ -15,20 +15,20 @@ export default function SpecialCard({
 }) {
   const navigate = useNavigate();
   return (
-    <div onClick={() => navigate(`product-details/${id}/${slug}`)}>
-      <div>
-        <img src={import.meta.env.VITE_BASE_FILE_URL + image} alt={title} />
-        <span>{discountPercent}%</span>
+    <div className="group h-full cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl" onClick={() => navigate(`product-details/${id}/${slug}`)}>
+      <div className="relative overflow-hidden bg-slate-100">
+        <img className="aspect-square w-full object-cover transition duration-300 group-hover:scale-105" src={import.meta.env.VITE_BASE_FILE_URL + image} alt={title} />
+        <span className="absolute left-3 top-3 rounded-full bg-rose-500 px-3 py-1 text-xs font-bold text-white">{discountPercent}%</span>
       </div>
-      <div>
-        <h2>{title}</h2>
-        <div>
-          <p>price: ${price}</p>
-          <p>{finalPrice}</p>
+      <div className="space-y-3 p-4">
+        <h2 className="truncate text-base font-bold text-slate-900">{title}</h2>
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-sm text-slate-500">price: ${price}</p>
+          <p className="font-bold text-indigo-600">${finalPrice}</p>
         </div>
-        <div>
+        <div className="flex items-center justify-between gap-2 text-xs text-slate-500">
           <p>Rating : ${avgRating}</p>
-          <p>
+          <p className="truncate">
             {minPrice} {maxPrice}
           </p>
         </div>

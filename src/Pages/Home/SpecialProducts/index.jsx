@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchData } from "../../../Utils/fetchData";
 import Skeleton from "./Skeleton";
-import Swiper from "swiper";
-import { SwiperSlide } from "swiper/react";
+import { Swiper,SwiperSlide } from "swiper/react";
 import SpecialCard from "./SpecialCard";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,20 +13,20 @@ export default function SpecialProducts() {
   useEffect(() => {
     (async () => {
       const result = await fetchData(
-        "products?sort=-maxDiscountPrice&limit=10",
+        "products?sort=-maxDiscountPercent&limit=10",
       );
-      setProducts(result.json());
+      setProducts(result.data);
     })();
   }, []);
   if (!products) return <Skeleton />;
   const items = products?.map((item) => (
     <SwiperSlide key={item._id}>
       <SpecialCard
-        image={item.image}
+        image={item.images?.at(0)}
         id={item._id}
-        price={item.defaultProductVariant.price}
-        finalPrice={item.defaultProductVariant.finalPrice}
-        discountPercent={item.defaultProductVariant.discountPercent}
+        price={item.defaultProductVariantId.price}
+        finalPrice={item.defaultProductVariantId.finalPrice}
+        discountPercent={item.defaultProductVariantId.discountPercent}
         minPrice={item.minPrice}
         maxPrice={item.maxPrice}
         title={item.title}
@@ -36,35 +35,36 @@ export default function SpecialProducts() {
     </SwiperSlide>
   ));
   return (
-    <div>
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <h2 className="mb-6 text-2xl font-bold text-slate-900">Special Products</h2>
       <Swiper
-        Autoplay={{
+        autoplay={{
           delay: 2000,
           disableOnInteraction: false,
         }}
         loop={true}
-        module={[Autoplay, Pagination, Navigation]}
-        Navigation={true}
-        Pagination={{ clickable: true }}
-        breakPoint={{
+        modules={[Autoplay, Pagination, Navigation]}
+        navigation={true}
+        pagination={{ clickable: true }}
+        breakpoints={{
           320: {
-            slidePerView: 1,
+            slidesPerView: 1,
             spaceBetween: 20,
           },
           640: {
-            slidePerView: 2,
+            slidesPerView: 2,
             spaceBetween: 30,
           },
           960: {
-            slidePerView: 3,
+            slidesPerView: 3,
             spaceBetween: 40,
           },
           1200: {
-            slidePerView: 4,
+            slidesPerView: 4,
             spaceBetween: 40,
           },
           1400: {
-            slidePerView: 5,
+            slidesPerView: 5,
             spaceBetween: 40,
           },
         }}

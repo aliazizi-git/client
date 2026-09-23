@@ -78,33 +78,34 @@ export default function SearchBar() {
     <span>{item.title}</span>
   </div>)
   return (
-    <div className="search-container">
+    <div className="search-container relative w-full min-w-0 sm:w-72">
       <input
+      className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100"
         type="text"
         placeholder="enter see"
         onChange={(e) =>
           dispatch({ type: "SEARCH_REQUEST", payload: e.target.value })
         }
       />
-      <div className={showResult? 'h-100' : 'h-0'}>
+        <div className={`${showResult ? 'visible max-h-96 opacity-100' : 'invisible max-h-0 opacity-0'} absolute left-0 right-0 top-full z-20 mt-2 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-xl transition-all`}>
         {loading? <Grid/> :
-         categories?.length ==0 && products?.length ==0 ?(<h2>Not Found</h2>)
+         categories?.length ==0 && products?.length ==0 ?(<h2 className="text-base font-semibold text-slate-700">Not Found</h2>)
          :(
             <>
-                <div>
-                    <h2>Categories</h2>
+            <div className="mb-4">
+              <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-slate-500">Categories</h2>
                     {categoryItems?.length !=0 ?
                     categoryItems 
                     :(
-                        <h3>category not found!</h3>
+                <h3 className="text-sm text-slate-400">category not found!</h3>
                     )}
                 </div>
                 <div>
-                    <h2>products</h2>
+              <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-slate-500">products</h2>
                     {productItems?.length !=0 ?
                     productItems 
                     :(
-                        <h3>products not found!</h3>
+                <h3 className="text-sm text-slate-400">products not found!</h3>
                     )}
                 </div>
             </>
